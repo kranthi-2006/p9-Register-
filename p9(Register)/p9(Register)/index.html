@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #537D5D;
+        color: #D2D0A0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        min-height: 100vh;
+        margin: 0;
+        transition: background 0.5s ease;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        margin: 1rem 0 0.5rem;
+        color: #D2D0A0;
+        letter-spacing: 1px;
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      input[type="text"] {
+        width: 80%;
+        max-width: 400px;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 2px solid #9EBC8A;
+        border-radius: 8px;
+        outline: none;
+        background-color: #73946B;
+        color: #D2D0A0;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        border-color: #D2D0A0;
+        background-color: #9EBC8A;
+        color: #2C2C2C;
+        box-shadow: 0 0 10px rgba(210, 208, 160, 0.5);
+      }
+
+      button {
+        background-color: #73946B;
+        color: #D2D0A0;
+        border: none;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      button:hover {
+        background-color: #9EBC8A;
+        color: #2C2C2C;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(210, 208, 160, 0.3);
+      }
+
+      button:active {
+        transform: scale(0.96);
+      }
+
+      div {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        text-align: center;
+        width: 80%;
+        max-width: 500px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.1rem;
+        }
+        input[type="text"] {
+          width: 90%;
+        }
+        div {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>firstname</h1>
+    <input type="text" id="firstname" />
+    <h1>lastname</h1>
+    <input type="text" id="lastname" />
+    <h1>email</h1>
+    <input type="text" id="email" />
+    <h1>password</h1>
+    <input type="text" id="password" />
+    <button id="b1">register</button>
+
+    <div>
+      <input id="i1" placeholder="Enter email to read" />
+      <button id="b2">read</button>
+      <h1 id="fn">firstname</h1>
+      <h1 id="ln">lastname</h1>
+      <h1 id="em">email</h1>
+      <h1 id="pass">password</h1>
+    </div>
+
+    <script>
+      const b1 = document.getElementById("b1");
+      b1.addEventListener("click", () => {
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const user = {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: password,
+        };
+        localStorage.setItem(`${user.email}`, JSON.stringify(user));
+        alert("✅ User registered successfully!");
+      });
+
+      const b2 = document.getElementById("b2");
+      b2.addEventListener("click", () => {
+        const i2 = document.getElementById("i1").value;
+        const r1 = JSON.parse(localStorage.getItem(`${i2}`));
+        if (!r1) {
+          alert("⚠️ No user found for this email!");
+          return;
+        }
+        document.getElementById("fn").textContent = r1.firstname;
+        document.getElementById("ln").textContent = r1.lastname;
+        document.getElementById("em").textContent = r1.email;
+        document.getElementById("pass").textContent = r1.password;
+      });
+    </script>
+  </body>
+</html>
